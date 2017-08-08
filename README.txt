@@ -1,8 +1,10 @@
 Hey thanks for using my plugin!
 
-As long as you configure it correctly everything should go as planned.
+Inside the folder labeled "Bot Files" you will find two files, reportBot.js and config.js
 
-the config.js file should have all the info you need for setting that up.
+reportBot.js is the file you need to run to get the bot running. config.js you edit to get the bot working properly
+
+edit reportBot.js at your own risk, config.js has details on how to fill in each part inside the file itself
 
 This plugin is very simple it lets users type !report <username> <reason> or just !report <reason>
 if a user types !report mouse hacking it will post a message in the discord notifying the admins in the channel you specify and it will give you steamID's of both the reporter and the suspect
