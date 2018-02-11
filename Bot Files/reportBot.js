@@ -72,6 +72,7 @@ setInterval(function() {
 		  	reportDB.query(`UPDATE ${reportsDB} SET sent = 1 WHERE id = ${results[i].id}`);
 		  	if (!isBlocked(SteamID)) {
 			  	var serverName = results[i].server_name;
+			  	var ipPort = results[i].ip_port;
 			  	var reporterName = results[i].reporter;
 			  	var reporterID = results[i].reporter_id;
 			  	var suspectName = results[i].suspect;
@@ -79,9 +80,9 @@ setInterval(function() {
 			  	var reason = results[i].reason;
 			  	var dateOf = results[i].dateOf;
 			  	if (suspectName != null) {
-			  		channelReport.send(`**New Report!** ${admin}\n**Server**: ${serverName}\n**Date**: ${dateOf}\n**Reporter**: ${reporterName}\n**SteamID**: https://rep.tf/${reporterID} ${reporterID}\n**Suspect**: ${suspectName}\n**SteamID**: https://rep.tf/${suspectID} ${suspectID}\n**Reason**: ${reason}`);
+			  		channelReport.send(`**New Report!** ${admin}\n**Server**: ${serverName}\n**Connect**: steam://${ipPort}\n**Date**: ${dateOf}\n**Reporter**: ${reporterName}\n**SteamID**: https://rep.tf/${reporterID} ${reporterID}\n**Suspect**: ${suspectName}\n**SteamID**: https://rep.tf/${suspectID} ${suspectID}\n**Reason**: ${reason}`);
 			  	} else {
-			  		channelReport.send(`**New Report!** ${admin}\n**Server**: ${serverName}\n**Date**: ${dateOf}\n**Reporter**: ${reporterName}\n**SteamID**: https://rep.tf/${reporterID} ${reporterID}\n**Reason**: ${reason}`);
+			  		channelReport.send(`**New Report!** ${admin}\n**Server**: ${serverName}\n**Connect**: steam://${ipPort}\n**Date**: ${dateOf}\n**Reporter**: ${reporterName}\n**SteamID**: https://rep.tf/${reporterID} ${reporterID}\n**Reason**: ${reason}`);
 			  	}
 		  	}
 		}

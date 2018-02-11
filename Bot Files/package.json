@@ -1,0 +1,26 @@
+{
+  "name": "discord-report",
+  "version": "1.0.0",
+  "description": "Sourcemod plugin and nodejs Discord bot to allow people to report things happening on the server",
+  "main": "config.js",
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "discord.js": "^11.3.0",
+    "mysql": "^2.15.0",
+    "steamid": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drew73197/Discord-Report.git"
+  },
+  "author": "Andrew Adkins <reo@reo.tf> (https://reo.tf)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drew73197/Discord-Report/issues"
+  },
+  "homepage": "https://github.com/drew73197/Discord-Report#readme"
+}

@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS `reports`;
 CREATE TABLE `reports` (
   `id` int(11) NOT NULL,
   `server_name` varchar(128) NOT NULL,
+  `ip_port` varchar(32) DEFAULT NULL,
   `reporter` varchar(64) NOT NULL,
   `reporter_id` varchar(32) NOT NULL,
   `suspect` varchar(64) DEFAULT NULL,
