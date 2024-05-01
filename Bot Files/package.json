@@ -1,13 +1,29 @@
 {
   "name": "discord-report",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Sourcemod plugin and nodejs Discord bot to allow people to report things happening on the server",
   "main": "config.js",
   "dependencies": {
-    "dateformat": "^3.0.3",
-    "discord.js": "^11.3.0",
-    "mysql": "^2.15.0",
-    "steamid": "^1.1.0"
+    "bignumber.js": "^9.0.0",
+    "core-util-is": "^1.0.3",
+    "discord-api-types": "^0.37.61",
+    "fast-deep-equal": "^3.1.3",
+    "inherits": "^2.0.4",
+    "isarray": "^1.0.0",
+    "lodash": "^4.17.21",
+    "lodash.snakecase": "^4.1.1",
+    "magic-bytes.js": "^1.10.0",
+    "process-nextick-args": "^2.0.1",
+    "readable-stream": "^2.3.7",
+    "safe-buffer": "^5.1.2",
+    "sqlstring": "^2.3.1",
+    "string_decoder": "^1.1.1",
+    "ts-mixer": "^6.0.4",
+    "tslib": "^2.6.2",
+    "undici": "^5.27.2",
+    "undici-types": "^5.26.5",
+    "util-deprecate": "^1.0.2",
+    "ws": "^8.14.2"
   },
   "devDependencies": {},
   "scripts": {
@@ -17,6 +33,14 @@
     "type": "git",
     "url": "git+https://github.com/drew73197/Discord-Report.git"
   },
+  "keywords": [
+    "tf2",
+    "discord",
+    "bot",
+    "report",
+    "smx",
+    "sourcemod"
+  ],
   "author": "Andrew Adkins <reo@reo.tf> (https://reo.tf)",
   "license": "ISC",
   "bugs": {
