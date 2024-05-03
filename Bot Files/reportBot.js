@@ -260,18 +260,24 @@ async function run_rcon(command) {
                 });
 }
 
-function authenticateRcon() {
-    try {
-        rcon.authenticate(rconPassword)
-            .then(() => {
-                console.log('Connected to TF2 server via RCON');
-            })
-            .catch((error) => {
-                console.error('Error connecting to TF2 server via RCON:', error);
-            });
-        } catch(error) {
-            console.log(`We still have connection`);
-        }
+function authenticateRcon(attempt = 1) {
+    rcon.authenticate(rconPassword)
+        .then(() => {
+            console.log('Successfully connected and authenticated to TF2 server via RCON');
+        })
+        .catch(error => {
+            // Only retry if the error is not "Already authenticated"
+            if (!error.message.includes("Already authenticated")) {
+                
+                // Retry logic, with a limit on the number of attempts
+                if (attempt < 3) {
+                    console.log('Attempting to re-authenticate...');
+                    setTimeout(() => authenticateRcon(attempt + 1), 1000); // Wait 1 second before retrying
+                } else {
+                    console.error('Maximum re-authentication attempts reached.');
+                }
+            }
+        });
 }
 
 function getTimestamp() {
