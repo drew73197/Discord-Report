@@ -11,8 +11,9 @@ const errorLogFile = FS.createWriteStream('./Logs/discordError.log', { flags: 'a
 const rconLog = FS.createWriteStream('./Logs/rcon.log', { flags: 'a' });
 
 const {
-		keepReports,
-		checkReportsTimer,
+    steamApiKey,
+	keepReports,
+	checkReportsTimer,
     ipAddress,
     port,
     rconHost,
@@ -24,7 +25,7 @@ const {
     discordToken,
     reportChannel,
     updateVoiceChannelEnabled,
-		serverCountChannel,
+	serverCountChannel,
     tf2chatEnabled,
     tf2chatChannel,
     adminChatChannel,
@@ -208,46 +209,21 @@ discordClient.on('messageCreate', async (message) => {
 });
 
 async function updateVoiceChannelName() {
-    const channel = discordClient.channels.cache.get(serverCountChannel);
-    if (!channel) return console.error('Channel not found.');
+    try {
+        const channel = discordClient.channels.cache.get(serverCountChannel);
+        if (!channel) return console.error('Channel not found.');
+        const response = await axios.get(`https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=${steamApiKey}&filter=\\gameaddr\\${ipAddress}:${port}`);
+        const server = response.data.response.servers[0];
 
-    rcon.execute('status')
-                .then((response) => {
-                    const lines = response.split('\n');
-                    let foundStart = false;
-                    let formattedMessage = '';
-                    for (const line of lines) {
-                        if (!foundStart) {
-                            // Check if the line starts with a key-value pair indicator (e.g., "hostname:")
-                            if (/^\w+\s*:/.test(line)) {
-                                foundStart = true;
-                            }
-                        }
-                        if (foundStart) {
-                            formattedMessage += `${line}\n`;
-                        }
-                    }
-
-                    const humanPlayersRegex = /players\s*:\s*(\d+)\s*humans/;
-
-                    // Match the pattern in the text string and extract the number of human players
-                    const match = response.match(humanPlayersRegex);
-
-                    // Extract the number of human players from the captured group
-                    const humanPlayers = match ? parseInt(match[1]) : null;
-
-                    channel.setName(`Players: ${humanPlayers}`)
+        if (server) {
+            channel.setName(`Players: ${server.players}`)
                         .then(updatedChannel => console.log(`Updated channel name to: ${updatedChannel.name}`))
                         .catch(console.error);
-
-                })
-                .catch((error) => {
-                    console.error('Error fetching chat messages:', error);
-                });
-
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
-
-
 
 async function run_rcon(command) {
     rcon.execute(command) // Execute a command to get the status and chat messages

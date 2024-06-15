@@ -1,29 +1,31 @@
-// config.js
+require('dotenv').config();
+
 module.exports = {
-    keepReports: true, // Determines whether to keep reports after processing or delete them
-    checkReportsTimer: 30, // Interval in seconds to check for new reports
-    ipAddress: '', // IP address the UDP server will bind to (if applicable)
-    port: 8006, // Port number for the UDP server
-    rconHost: '', // Hostname for RCON server connection
-    rconPort: 27015, // Port number for RCON server connection
-    rconPassword: '', // Password for RCON server authentication
-    tableName: 'sb_reports', // The name of the database table for storing reports
-    reportDBConfig: { // Database configuration for the reports
-        connectionLimit: 10, // Maximum number of connections in the database pool
-        host: '', // Database server host
-        user: '', // Database user
-        password: '', // Database password
-        database: '' // Database name
+    steamApiKey: process.env.STEAM_API_KEY || '',
+    keepReports: process.env.KEEP_REPORTS === 'true', 
+    checkReportsTimer: parseInt(process.env.CHECK_REPORTS_TIMER, 10) || 30,
+    ipAddress: process.env.IP_ADDRESS || '',
+    port: parseInt(process.env.PORT, 10) || 8006,
+    rconHost: process.env.RCON_HOST || '',
+    rconPort: parseInt(process.env.RCON_PORT, 10) || 27015,
+    rconPassword: process.env.RCON_PASSWORD || '',
+    tableName: process.env.TABLE_NAME || 'sb_reports',
+    reportDBConfig: {
+        connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10) || 10,
+        host: process.env.DB_HOST || '',
+        user: process.env.DB_USER || '',
+        password: process.env.DB_PASSWORD || '',
+        database: process.env.DB_NAME || ''
     },
-    discordServerID: '', // Discord server ID for bot interaction
-    discordToken: '', // Token for authenticating the Discord bot
-    reportChannel: '', // Discord channel ID for reporting messages
-    updateVoiceChannelEnabled: true, // Toggle for updating Discord voice channel names based on server status
-    serverCountChannel: '', // Discord voice channel ID to display player count
-    tf2chatEnabled: true, // Toggle for Team Fortress 2 chat integration
-    tf2chatChannel: '', // Discord channel ID for TF2 chat messages
-    adminChatChannel: '', // Discord channel ID for admin messages
-    logAdminMessages: true, // Toggle for logging admin messages to a specific channel
-    adminLogChannel: '', // Discord channel ID where admin logs are sent
-    timeZoneCon: 'America/New_York' // Time zone configuration for report timestamps
+    discordServerID: process.env.DISCORD_SERVER_ID || '',
+    discordToken: process.env.DISCORD_TOKEN || '',
+    reportChannel: process.env.REPORT_CHANNEL || '',
+    updateVoiceChannelEnabled: process.env.UPDATE_VOICE_CHANNEL_ENABLED === 'true',
+    serverCountChannel: process.env.SERVER_COUNT_CHANNEL || '',
+    tf2chatEnabled: process.env.TF2CHAT_ENABLED === 'true',
+    tf2chatChannel: process.env.TF2CHAT_CHANNEL || '',
+    adminChatChannel: process.env.ADMIN_CHAT_CHANNEL || '',
+    logAdminMessages: process.env.LOG_ADMIN_MESSAGES === 'true',
+    adminLogChannel: process.env.ADMIN_LOG_CHANNEL || '',
+    timeZoneCon: process.env.TIME_ZONE_CON || 'America/New_York'
 };
